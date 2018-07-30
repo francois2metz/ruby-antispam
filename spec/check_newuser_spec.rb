@@ -67,19 +67,16 @@ describe Cleantalk::CheckNewuser do
   describe "#allowed?" do
     it "call one time request and return false when not allowed" do
       stub_request(:post, "https://moderate.cleantalk.org:443/api2.0").with(body: JSON.fast_generate(base_parameters), headers: headers).to_return(status: 200, body: JSON.dump(res_body_ban), headers: {})
+      expect_any_instance_of(described_class).to receive(:http_request_without_parse).once.and_call_original
 
-      expect(request.allowed?).to eql(false)
-      expect_any_instance_of(described_class).to_not receive(:http_request_without_parse)
       expect(request.allowed?).to eql(false)
       expect(request.allowed?).to eql(false)
     end
 
     it "call one time request and return false when not allowed" do
       stub_request(:post, "https://moderate.cleantalk.org:443/api2.0").with(body: JSON.fast_generate(base_parameters), headers: headers).to_return(status: 200, body: JSON.dump(res_body_not_ban), headers: {})
+      expect_any_instance_of(described_class).to receive(:http_request_without_parse).once.and_call_original
 
-      expect(request.allowed?).to eql(true)
-      expect_any_instance_of(described_class).to_not receive(:http_request_without_parse)
-      expect(request.allowed?).to eql(true)
       expect(request.allowed?).to eql(true)
     end
   end
