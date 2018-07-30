@@ -86,3 +86,18 @@ request = Cleantalk::IpInfo.new({
 
 request.result   # => <Object Cleantalk::IpInfoResult> with all response data
 ```
+
+## Send Feedback
+
+See https://cleantalk.org/help/api-send-feedback
+
+```ruby
+require 'cleantalk'
+
+request = Cleantalk::SendFeedback.new({
+  auth_key: 'ur_api_key',                           # Required if not defined via Cleantalk.auth_key. the API Key
+  feedback: [['requestid1', 1], ['requestid2', 0]] # Required: the feedback to send: 0 if it's spam, 1 if not spam
+})
+
+request.result   # => <Object Cleantalk::SendFeedbackResult> with all response data
+```
