@@ -73,7 +73,7 @@ request.allowed? # => true or false
 request.result   # => <Object Cleantalk::CheckMessageResult> with all response data
 ```
 
-## Ip Info
+## IP Info
 
 See https://cleantalk.org/help/api-ip-info-country-code
 
