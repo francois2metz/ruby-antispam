@@ -72,3 +72,17 @@ request = Cleantalk::CheckMessage.new({
 request.allowed? # => true or false
 request.result   # => <Object Cleantalk::CheckMessageResult> with all response data
 ```
+
+## Ip Info
+
+See https://cleantalk.org/help/api-ip-info-country-code
+
+```ruby
+require 'cleantalk'
+
+request = Cleantalk::IpInfo.new({
+  ip: '127.0.0.1',           # Required: The IP to get info from
+})
+
+request.result   # => <Object Cleantalk::IpInfoResult> with all response data
+```
