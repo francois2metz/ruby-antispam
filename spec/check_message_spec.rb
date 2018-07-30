@@ -55,7 +55,7 @@ describe Cleantalk::CheckMessage do
   it 'create a request' do
     subject.auth_key = 'test'
     expect(subject.auth_key).to eql('test')
-    expect(subject.is_a? Cleantalk::Request).to eql(true)
+    expect(subject.is_a? Cleantalk::Request).to be true
     expect(subject.method_name).to eql("check_message")
   end
 
@@ -63,7 +63,7 @@ describe Cleantalk::CheckMessage do
     it 'can pass params definition' do
       expect(request.auth_key).to eql('test')
       expect(request.sender_email).to eql('test@example.org')
-      expect(request.is_a? Cleantalk::Request).to eql(true)
+      expect(request.is_a? Cleantalk::Request).to be true
       expect(request.method_name).to eql("check_message")
       expect(request.message).to eql(base_parameters[:message])
     end
@@ -73,19 +73,17 @@ describe Cleantalk::CheckMessage do
     it "call one time request and return false when not allowed" do
       stub_request(:post, "https://moderate.cleantalk.org:443/api2.0").with(body: JSON.fast_generate(base_parameters), headers: headers).to_return(status: 200, body: JSON.dump(res_body_ban), headers: {})
 
-      expect(request.allowed?).to eql(false)
+      expect(request.allowed?).to be false
       expect_any_instance_of(described_class).to_not receive(:http_request_without_parse)
-      expect(request.allowed?).to eql(false)
-      expect(request.allowed?).to eql(false)
+      expect(request.allowed?).to be false
     end
 
     it "call one time request and return false when not allowed" do
       stub_request(:post, "https://moderate.cleantalk.org:443/api2.0").with(body: JSON.fast_generate(base_parameters), headers: headers).to_return(status: 200, body: JSON.dump(res_body_not_ban), headers: {})
 
-      expect(request.allowed?).to eql(true)
+      expect(request.allowed?).to be true
       expect_any_instance_of(described_class).to_not receive(:http_request_without_parse)
-      expect(request.allowed?).to eql(true)
-      expect(request.allowed?).to eql(true)
+      expect(request.allowed?).to be true
     end
   end
 end
