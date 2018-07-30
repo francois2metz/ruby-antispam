@@ -10,11 +10,11 @@ describe Cleantalk::IpInfo do
   end
 
   it 'create a request' do
-    subject.auth_key = 'test'
-    expect(subject.auth_key).to eql('test')
+    request.auth_key = 'test'
+    expect(request.auth_key).to eql('test')
     expect(request.ip).to eql('8.8.8.8')
-    expect(subject.is_a? Cleantalk::Request).to be true
-    expect(subject.method_name).to eql("ip_info")
+    expect(request.is_a? Cleantalk::Request).to be true
+    expect(request.method_name).to eql("ip_info")
   end
 
   let(:res_body) {  {"data":{"8.8.8.8":{"country_code":"US","country_name":"United States"}}} }
